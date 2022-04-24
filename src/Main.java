@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
 
-        Path path = Paths.get("src/INPUT2.txt");
+        Path path = Paths.get("src/INPUT.txt");
         Scanner sc = new Scanner(path);
         List<Integer> dataList = new ArrayList<>();
 
@@ -33,11 +33,14 @@ public class Main {
 
         int i = 0;
         int j = lengthOflistPass - 1;
+        ArrayList<Boat> listBoat = new ArrayList<>();
+
         for (i = 0; i <= j; ) {
 
 
                 if (listPass.get(i) + listPass.get(j) <= dataList.get(1)) {
                     countOfBoats++;
+                   listBoat.add(new Boat(listPass.get(i) + listPass.get(j)));
                     i++;
                     j--;
 
@@ -46,6 +49,7 @@ public class Main {
 
                 if (listPass.get(i) + listPass.get(j) > dataList.get(1) && listPass.get(i) > listPass.get(j) && listPass.get(i)<=dataList.get(1)) {
                     countOfBoats++;
+                    listBoat.add(new Boat(listPass.get(i)));
                     i++;
 
                     //break;
@@ -53,6 +57,7 @@ public class Main {
                 }
                 if (listPass.get(i) + listPass.get(j) > dataList.get(1) && listPass.get(i) < listPass.get(j) && listPass.get(j)<=dataList.get(1)) {
                     countOfBoats++;
+                    listBoat.add(new Boat(listPass.get(j)));
                     j--;
 
                 }
@@ -65,6 +70,12 @@ public class Main {
 
         }
         System.out.println(countOfBoats);
+        for (Boat b:listBoat
+             ) {
+            System.out.println(b.gp);
+
+        }
+
         try(FileWriter writer = new FileWriter("OUTPUT.TXT", false))
         {
             // запись всей строки
